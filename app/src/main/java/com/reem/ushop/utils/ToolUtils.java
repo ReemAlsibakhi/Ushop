@@ -1,8 +1,14 @@
 package com.reem.ushop.utils;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.res.ColorStateList;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
+
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.ImageViewCompat;
 
 public class ToolUtils {
 
@@ -18,5 +24,8 @@ public class ToolUtils {
             }
         } catch (Exception e) {
         }
+    }
+    public static void setColorIcon(Context context, ImageView imageView, int color){
+        ImageViewCompat.setImageTintList(imageView, ColorStateList.valueOf(ContextCompat.getColor(context,color)));
     }
 }

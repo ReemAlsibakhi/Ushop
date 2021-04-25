@@ -1,5 +1,6 @@
 package com.reem.ushop.pojo;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
@@ -15,7 +16,7 @@ public class Category {
 	private int id;
 
 	@SerializedName("subcategories")
-	private List<Subcategories> subcategories;
+	private ArrayList<Subcategories> subcategories;
 
 	public void setImage(String image){
 		this.image = image;
@@ -41,11 +42,11 @@ public class Category {
 		return id;
 	}
 
-	public void setSubcategories(List<Subcategories> subcategories){
+	public void setSubcategories(ArrayList<Subcategories> subcategories){
 		this.subcategories = subcategories;
 	}
 
-	public List<Subcategories> getSubcategories(){
+	public ArrayList<Subcategories> getSubcategories(){
 		return subcategories;
 	}
 

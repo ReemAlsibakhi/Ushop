@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.activity.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,15 +44,32 @@
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:background="@drawable/bg_white_border"/>
-
-        <FrameLayout
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.7"
+            android:orientation="vertical"
             android:paddingStart="5dp"
-            android:paddingTop="10dp"
             android:paddingEnd="5dp"
-            android:background="@drawable/bg_gray_border"/>
+            android:paddingTop="10dp"
+            android:background="@drawable/bg_gray_border">
+
+            <TextView
+                android:id="@+id/tv_catName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Real Estate"
+                android:textAlignment="center"
+                android:textColor="@color/black_light2"
+                android:textSize="14sp" />
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+              />
+        </LinearLayout>
+
 
     </LinearLayout>
 </LinearLayout>
