@@ -40,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         initRecycler();
+        initEditListeners();
+    }
+
+    private void initEditListeners() {
+
     }
 
     private void initRecycler() {
