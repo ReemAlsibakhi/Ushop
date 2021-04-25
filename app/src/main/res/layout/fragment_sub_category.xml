@@ -7,13 +7,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.fragment.SubCategoryFragment">
+
     <TextView
         android:id="@+id/tv_catName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
+        android:fontFamily="@font/roboto_medium"
+        android:text="Real Estate"
         android:textAlignment="center"
-        android:textColor="@color/black_light2"
+        android:textColor="@color/black"
         android:textSize="14sp" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_subCat"

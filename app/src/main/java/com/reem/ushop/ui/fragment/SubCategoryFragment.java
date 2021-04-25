@@ -15,13 +15,14 @@ import com.reem.ushop.databinding.FragmentSubCategoryBinding;
 import com.reem.ushop.pojo.Category;
 import com.reem.ushop.pojo.Subcategories;
 import com.reem.ushop.ui.activity.SubCategoryActivity;
+import com.reem.ushop.utils.Constant;
+
 import java.util.ArrayList;
 
 
 public class SubCategoryFragment extends Fragment {
    private FragmentSubCategoryBinding binding;
    private View v;
-   public  static ArrayList<Subcategories> subcategories=new ArrayList<>();
    private SubCategoryAdapter subCategoryAdapter;
    private Category category;
     private static final String TAG = "SubCategoryFragment";
@@ -31,7 +32,7 @@ public class SubCategoryFragment extends Fragment {
     public static SubCategoryFragment newInstance(Category category) {
         SubCategoryFragment fragment = new SubCategoryFragment();
         Bundle args = new Bundle();
-        args.putSerializable("category",(Category)  category);
+        args.putSerializable(Constant.CATEGORY,(Category)  category);
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,9 +41,8 @@ public class SubCategoryFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            subcategories = getArguments().getParcelableArrayList("sub cat");
-            category= (Category) getArguments().getSerializable("category");
-            Log.e(TAG, "onCreate: "+category.getName() );
+            category= (Category) getArguments().getSerializable(Constant.CATEGORY);
+            Log.e(TAG, "onCreate: "+category.getName());
         }
     }
 
@@ -72,17 +72,17 @@ public class SubCategoryFragment extends Fragment {
         binding.rvSubCat.setLayoutManager(layoutManager);
         subCategoryAdapter=new SubCategoryAdapter(requireContext());
         binding.rvSubCat.setAdapter(subCategoryAdapter);
-        initListener();
+        initListeners();
     }
 
-    private void initListener() {
+    private void initListeners() {
         subCategoryAdapter.setOnItemClickListener(new SubCategoryAdapter.OnItemClickListener() {
             @Override
             public void onClicked(int position, Subcategories subcategory) {
                 if (subcategory.getSubcategories().size()>0){
                    setData(subcategory.getSubcategories());
                 }else {
-                    startActivity(new Intent(requireContext(),SubCategoryActivity.class));
+                    startActivity(new Intent(requireContext(),SubCategoryActivity.class).putExtra(Constant.CATEGORY_NAME,subcategory.getName()));
                 }
             }
         });
