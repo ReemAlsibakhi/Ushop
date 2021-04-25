@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         initRecycler();
         getCategories();
-        showFragment(SubCategoryFragment.newInstance(subCatList));
+
     }
     private void initRecycler() {
         binding.rvCategory.setLayoutManager(new LinearLayoutManager(MainActivity.this));
@@ -53,10 +53,10 @@ public class MainActivity extends AppCompatActivity {
         categoryAdapter.setOnItemClickListener(new CategoryAdapter.OnItemClickListener() {
             @Override
             public void onClicked(int position, Category category) {
-                binding.tvCatName.setText(category.getName());
                 if (category.getSubcategories().size()>0){
-                    showFragment(SubCategoryFragment.newInstance(category.getSubcategories()));
-                }else { startActivity(new Intent(MainActivity.this,SubCategoryActivity.class));
+                    showFragment(SubCategoryFragment.newInstance(category));
+                }else {
+                    startActivity(new Intent(MainActivity.this,SubCategoryActivity.class));
                 }
             }
         });
@@ -77,9 +77,9 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseGet<ArrayList<Category>>> call, Response<ResponseGet<ArrayList<Category>>> response) {
                 if (response.body().getStatus().equals("OK")){
                     categoryAdapter.setList(response.body().getData());
-                    subCatList=response.body().getData().get(0).getSubcategories();
+                   // subCatList=response.body().getData().get(0).getSubcategories();
+                    showFragment(SubCategoryFragment.newInstance(response.body().getData().get(0)));
                     Log.e(TAG, "onResponse: sub  "+subCatList.size() );
-                    binding.tvCatName.setText(response.body().getData().get(0).getName());
                 }
             }
             @Override

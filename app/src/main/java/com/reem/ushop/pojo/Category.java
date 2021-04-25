@@ -1,10 +1,10 @@
 package com.reem.ushop.pojo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class Category {
+public class Category implements Serializable {
 
 	@SerializedName("image")
 	private String image;

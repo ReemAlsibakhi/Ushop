@@ -36,7 +36,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     @Override
     public void onBindViewHolder(@NonNull SubCategoryAdapter.ViewHolder holder, final int position) {
         Subcategories subcategory = dataList.get(position);
-        Glide.with(mContext).load(subcategory.getImage()).centerCrop().override(20, 20).into(holder.binding.imgSubCat);
+        Glide.with(mContext).load(subcategory.getImage()).override(100, 100).into(holder.binding.imgSubCat);
         holder.binding.tvName.setText(subcategory.getName());
         holder.itemView.setOnClickListener(view -> {
             notifyDataSetChanged();

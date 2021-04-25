@@ -1,13 +1,11 @@
 package com.reem.ushop.pojo;
 
 import android.os.Parcel;
-import android.os.Parcelable;
-
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class Subcategories implements Parcelable {
+public class Subcategories implements Serializable {
 
 	@SerializedName("image")
 	private String image;
@@ -26,30 +24,6 @@ public class Subcategories implements Parcelable {
 		name = in.readString();
 		id = in.readInt();
 	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(image);
-		dest.writeString(name);
-		dest.writeInt(id);
-	}
-
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-
-	public static final Creator<Subcategories> CREATOR = new Creator<Subcategories>() {
-		@Override
-		public Subcategories createFromParcel(Parcel in) {
-			return new Subcategories(in);
-		}
-
-		@Override
-		public Subcategories[] newArray(int size) {
-			return new Subcategories[size];
-		}
-	};
 
 	public void setImage(String image){
 		this.image = image;

@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 
 import com.reem.ushop.adapter.SubCategoryAdapter;
 import com.reem.ushop.databinding.FragmentSubCategoryBinding;
+import com.reem.ushop.pojo.Category;
 import com.reem.ushop.pojo.Subcategories;
 import com.reem.ushop.ui.activity.SubCategoryActivity;
-
 import java.util.ArrayList;
 
 
@@ -23,14 +23,15 @@ public class SubCategoryFragment extends Fragment {
    private View v;
    public  static ArrayList<Subcategories> subcategories=new ArrayList<>();
    private SubCategoryAdapter subCategoryAdapter;
+   private Category category;
     private static final String TAG = "SubCategoryFragment";
 
     public SubCategoryFragment() {
     }
-    public static SubCategoryFragment newInstance(ArrayList<Subcategories> subcategory) {
+    public static SubCategoryFragment newInstance(Category category) {
         SubCategoryFragment fragment = new SubCategoryFragment();
         Bundle args = new Bundle();
-        args.putParcelableArrayList("sub cat", subcategory);
+        args.putSerializable("category",(Category)  category);
         fragment.setArguments(args);
         return fragment;
     }
@@ -39,8 +40,9 @@ public class SubCategoryFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            subcategories = getArguments().getParcelableArrayList("sub cat");
-            Log.e(TAG, "onCreate: "+subcategories.size() );
+//            subcategories = getArguments().getParcelableArrayList("sub cat");
+            category= (Category) getArguments().getSerializable("category");
+            Log.e(TAG, "onCreate: "+category.getName() );
         }
     }
 
@@ -55,7 +57,8 @@ public class SubCategoryFragment extends Fragment {
 
     @Override
     public void onResume() {
-        setData(subcategories);
+        setData(category.getSubcategories());
+        binding.tvCatName.setText(category.getName());
         super.onResume();
     }
 
