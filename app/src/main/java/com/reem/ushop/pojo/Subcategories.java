@@ -3,6 +3,7 @@ package com.reem.ushop.pojo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
@@ -18,7 +19,7 @@ public class Subcategories implements Parcelable {
 	private int id;
 
 	@SerializedName("subcategories")
-	private List<Object> subcategories;
+	private ArrayList<Subcategories> subcategories;
 
 	protected Subcategories(Parcel in) {
 		image = in.readString();
@@ -74,11 +75,11 @@ public class Subcategories implements Parcelable {
 		return id;
 	}
 
-	public void setSubcategories(List<Object> subcategories){
+	public void setSubcategories(ArrayList<Subcategories> subcategories){
 		this.subcategories = subcategories;
 	}
 
-	public List<Object> getSubcategories(){
+	public ArrayList<Subcategories> getSubcategories(){
 		return subcategories;
 	}
 

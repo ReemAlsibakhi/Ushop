@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.Log;
-import android.widget.Toast;
-
 import com.reem.ushop.R;
 import com.reem.ushop.adapter.CategoryAdapter;
 import com.reem.ushop.data.network.api.MainClient;
@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Category> categoryList = new ArrayList<>();
     private ArrayList<Subcategories> subCatList = new ArrayList<>();
     private CategoryAdapter categoryAdapter;
-    private int currentPosition = 0;
-
     private static final String TAG = "MainActivity";
 
     @Override
@@ -38,28 +36,36 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        buildRecy();
+        initRecycler();
+        getCategories();
         showFragment(SubCategoryFragment.newInstance(subCatList));
     }
-    private void buildRecy() {
-
+    private void initRecycler() {
         binding.rvCategory.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         categoryAdapter = new CategoryAdapter(MainActivity.this);
         DividerItemDecoration itemDecor = new DividerItemDecoration(getApplicationContext(), VERTICAL);
         binding.rvCategory.addItemDecoration(itemDecor);
         binding.rvCategory.setAdapter(categoryAdapter);
+        initListener();
+
+    }
+    private void initListener() {
         categoryAdapter.setOnItemClickListener(new CategoryAdapter.OnItemClickListener() {
             @Override
             public void onClicked(int position, Category category) {
-                showFragment(SubCategoryFragment.newInstance(category.getSubcategories()));
+                binding.tvCatName.setText(category.getName());
+                if (category.getSubcategories().size()>0){
+                    showFragment(SubCategoryFragment.newInstance(category.getSubcategories()));
+                }else { startActivity(new Intent(MainActivity.this,SubCategoryActivity.class));
+                }
             }
         });
-
     }
     @Override
     protected void onResume() {
         ToolUtils.hideKeyboard(MainActivity.this);
         getCategories();
+      //  showFragment(SubCategoryFragment.newInstance(subCatList));
         super.onResume();
     }
     private void getCategories() {
@@ -70,12 +76,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseGet<ArrayList<Category>>> call, Response<ResponseGet<ArrayList<Category>>> response) {
                 if (response.body().getStatus().equals("OK")){
-                    Log.e(TAG, "onResponse: data"+response.body().getData()+"" );
                     categoryAdapter.setList(response.body().getData());
                     subCatList=response.body().getData().get(0).getSubcategories();
-                    Log.e(TAG, "onResponse: sub cat"+subCatList );
+                    Log.e(TAG, "onResponse: sub  "+subCatList.size() );
+                    binding.tvCatName.setText(response.body().getData().get(0).getName());
                 }
-                Toast.makeText(MainActivity.this,response.toString()+"",Toast.LENGTH_LONG).show();
             }
             @Override
             public void onFailure(Call<ResponseGet<ArrayList<Category>>> call, Throwable t) {
