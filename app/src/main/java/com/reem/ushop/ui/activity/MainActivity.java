@@ -75,24 +75,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
               //  SubCategoryFragment.newInstance(s.toString(), category);
-                filter(s.toString());
+                Bundle bundle=new Bundle();
+                bundle.putString(Constant.STR_FILTER,s.toString());
+                new SubCategoryFragment().setArguments(bundle);
                 Log.e(TAG, "afterTextChanged: " + s.toString());
             }
         });
     }
-    private void filter(String strFilter) {
-       // if (strFilter!=null){
-            ArrayList<Subcategories> filteredList = new ArrayList<>();
-        Log.e(TAG, "filter: bbbbbb" );
-            for (Subcategories item : category.getSubcategories()) {
-               // if (item.getName().toLowerCase().contains(strFilter.toLowerCase())) {
-                    Log.e(TAG, "filter: aaaaaaaaaaa" );
-                    filteredList.add(item);
-               // }
-                new SubCategoryAdapter(this).filterList(filteredList);
-            }
-    }
-       //     }
+
 
     private void initRecycler() {
         binding.rvCategory.setLayoutManager(new LinearLayoutManager(MainActivity.this));
