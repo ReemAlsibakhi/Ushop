@@ -74,10 +74,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-              //  SubCategoryFragment.newInstance(s.toString(), category);
-                Bundle bundle=new Bundle();
-                bundle.putString(Constant.STR_FILTER,s.toString());
-                new SubCategoryFragment().setArguments(bundle);
+                SubCategoryFragment.newInstance(s.toString(), category);
+//                Bundle bundle=new Bundle();
+//                bundle.putString(Constant.STR_FILTER,s.toString());
+//                new SubCategoryFragment().setArguments(bundle);
                 Log.e(TAG, "afterTextChanged: " + s.toString());
             }
         });

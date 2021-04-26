@@ -14,7 +14,6 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     public ArrayList<Subcategories> dataList;
     private Context mContext;
     private OnItemClickListener mListener;
-    private int selectedPos = 0;
 
     public void filterList(ArrayList<Subcategories> filteredList) {
         dataList = filteredList;

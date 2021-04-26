@@ -45,10 +45,8 @@ public class SubCategoryFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             category= (Category) getArguments().getSerializable(Constant.CATEGORY);
-            Log.e(TAG, "onCreate: filter"+strFilter);
+            strFilter=getArguments().getString(Constant.STR_FILTER);
         }
-
-
     }
 
     @Override
@@ -56,17 +54,14 @@ public class SubCategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentSubCategoryBinding.inflate(inflater, container, false);
         v = binding.getRoot();
-        strFilter= getArguments().getString(Constant.STR_FILTER);
-        Log.e(TAG, "onCreateView: filter string "+strFilter );
-
         initView();
+        filter(strFilter);
         return v;
     }
 
     private void initView() {
         initRecycler();
     }
-
     @Override
     public void onResume() {
         subcatList=category.getSubcategories();
@@ -76,8 +71,8 @@ public class SubCategoryFragment extends Fragment {
     }
     private void filter(String strFilter) {
         ArrayList<Subcategories> filteredList = new ArrayList<>();
-        for ( Subcategories item : category.getSubcategories() ) {
-            Log.e(TAG, "filter: category "+category.getSubcategories() );
+        for ( Subcategories item : subcatList ) {
+            Log.e(TAG, "filter: category "+subcatList);
             if (item.getName().toLowerCase().contains(strFilter.toLowerCase())) {
                 filteredList.add(item);
             }

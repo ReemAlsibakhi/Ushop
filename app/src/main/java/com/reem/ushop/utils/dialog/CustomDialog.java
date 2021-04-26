@@ -8,9 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-
 import androidx.fragment.app.DialogFragment;
-
 import com.reem.ushop.databinding.FragmentCustomDialogBinding;
 
 
@@ -36,8 +34,6 @@ public class CustomDialog extends DialogFragment {
         fragment.setArguments(args);
         return fragment;
     }
-
-
     private void getArgumentsData() {
         if (getArguments() != null) {
             this.title = getArguments().getString("title");
@@ -46,8 +42,6 @@ public class CustomDialog extends DialogFragment {
             this.cancelMsg = getArguments().getString("cancelMsg");
         }
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCustomDialogBinding.inflate(getLayoutInflater());
