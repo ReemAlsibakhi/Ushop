@@ -126,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
                 binding.progress.setVisibility(View.GONE);
                 if (response.body().getStatus().equals("OK")) {
                     categoryAdapter.setList(response.body().getData());
-                    category = response.body().getData().get(mPosition);
-                    showFragment(SubCategoryFragment.newInstance(strFiler, response.body().getData().get(mPosition)));
+                    category = response.body().getData().get(id);
+                    showFragment(SubCategoryFragment.newInstance(strFiler, response.body().getData().get(id)));
                 }
             }
 
@@ -142,8 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
                 .replace(R.id.container, fragment)
-                .commitAllowingStateLoss();
+                .commit();
     }
 }

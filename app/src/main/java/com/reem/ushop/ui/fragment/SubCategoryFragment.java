@@ -83,7 +83,6 @@ public class SubCategoryFragment extends Fragment {
             }
             subCategoryAdapter.filterList(filteredList);
         }
-        Log.e(TAG, "filter: bbbbbb" );
 
     }
 
