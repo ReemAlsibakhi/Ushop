@@ -25,14 +25,17 @@ public class SubCategoryFragment extends Fragment {
    private View v;
    private SubCategoryAdapter subCategoryAdapter;
    private Category category;
+   private String  strFilter;
+   private ArrayList<Subcategories> subcatList=new ArrayList<>();
     private static final String TAG = "SubCategoryFragment";
 
     public SubCategoryFragment() {
     }
-    public static SubCategoryFragment newInstance(Category category) {
+    public static SubCategoryFragment newInstance(String strFilter,Category category) {
         SubCategoryFragment fragment = new SubCategoryFragment();
         Bundle args = new Bundle();
         args.putSerializable(Constant.CATEGORY,(Category)  category);
+        args.putString(Constant.STR_FILTER,strFilter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,7 +45,9 @@ public class SubCategoryFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             category= (Category) getArguments().getSerializable(Constant.CATEGORY);
-            Log.e(TAG, "onCreate: "+category.getName());
+            strFilter= getArguments().getString(Constant.STR_FILTER);
+          //  filter(strFilter);
+            Log.e(TAG, "onCreate: filter"+strFilter);
         }
     }
 
@@ -51,15 +56,32 @@ public class SubCategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentSubCategoryBinding.inflate(inflater, container, false);
         v = binding.getRoot();
-        initRecycler();
+        initView();
         return v;
+    }
+
+    private void initView() {
+        initRecycler();
     }
 
     @Override
     public void onResume() {
-        setData(category.getSubcategories());
+        subcatList=category.getSubcategories();
+        setData(subcatList);
         binding.tvCatName.setText(category.getName());
         super.onResume();
+    }
+
+    private void filter(String strFilter) {
+     if (strFilter!=null){
+         ArrayList<Subcategories> filteredList = new ArrayList<>();
+         for (Subcategories item : subcatList) {
+             if (item.getName().toLowerCase().contains(strFilter.toLowerCase())) {
+                 filteredList.add(item);
+             }
+             subCategoryAdapter.filterList(filteredList);
+         }
+     }
     }
 
     private void setData(ArrayList<Subcategories> subcategory) {

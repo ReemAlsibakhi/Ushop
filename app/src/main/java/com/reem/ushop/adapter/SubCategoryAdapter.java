@@ -16,6 +16,11 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     private OnItemClickListener mListener;
     private int selectedPos = 0;
 
+    public void filterList(ArrayList<Subcategories> filteredList) {
+        dataList = filteredList;
+        notifyDataSetChanged();
+    }
+
     public interface OnItemClickListener {
         void onClicked(int position, Subcategories category);
     }
@@ -36,7 +41,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     @Override
     public void onBindViewHolder(@NonNull SubCategoryAdapter.ViewHolder holder, final int position) {
         Subcategories subcategory = dataList.get(position);
-        Glide.with(mContext).load(subcategory.getImage()).override(100, 100).into(holder.binding.imgSubCat);
+        Glide.with(mContext).load(subcategory.getImage()).override(200, 200).into(holder.binding.imgSubCat);
         holder.binding.tvName.setText(subcategory.getName());
         holder.itemView.setOnClickListener(view -> {
             notifyDataSetChanged();

@@ -3,4 +3,7 @@
     <string name="search_for_anything">Search for anything</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="internet_failed">Internet Connection Failed</string>
+    <string name="msg_internet_dialog">Please Check you Internet Connection and try again</string>
+    <string name="ok">Ok</string>
 </resources>
